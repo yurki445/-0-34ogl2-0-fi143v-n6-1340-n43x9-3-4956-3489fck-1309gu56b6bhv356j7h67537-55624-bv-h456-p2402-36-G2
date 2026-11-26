@@ -1,19 +1,169 @@
-   local character = player.Character
-        if not character then
-            warn("Cannot create the part because the character is not loaded")
-            return
-        end
+local new = Instance.new
+local players = game:GetService("Players")
+local player = players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+local ts = game:GetService("TweenService")
+local colors = {
+	white = Color3.fromRGB(255, 255, 255),
+	black = Color3.fromRGB(0, 0, 0),
+	gray = Color3.fromRGB(128, 128, 128),
+	darkgray = Color3.fromRGB(34, 34, 34),
+	Lavender = Color3.fromRGB(174, 149, 255),
 
-        local rootPart = character:FindFirstChild("HumanoidRootPart")
-        if not rootPart then
-            rootPart = character:WaitForChild("HumanoidRootPart", 5)
-        end
-        if not rootPart or not rootPart:IsA("BasePart") then
-            warn("Cannot create the part because the character has no HumanoidRootPart")
-            return
-        end
+}
+local themes = {
+	default = {
+	},
+	dark = {
 
-        local createdPart = new("Part")
-        createdPart.Anchored = true
-        createdPart.CFrame = rootPart.CFrame * CFrame.new(0, 0, -10)
-        createdPart.Parent = workspace
+	},
+	light = {
+	}
+}
+local function load()
+	local sg = new("ScreenGui")
+	sg.Name = "sg"
+	sg.Parent = playerGui
+	local background = new("CanvasGroup")
+	background.BackgroundColor3 = Color3.fromRGB(43, 43, 43)
+	background.BorderSizePixel = 0
+	background.GroupTransparency = 0.02
+	background.Size = UDim2.new(0, 700, 0, 400)
+	background.Position = UDim2.new(0.5, 0,0.5, 0)
+	background.AnchorPoint = Vector2.new(0.5, 0.5)
+	background.Name = "background"
+	background.Parent = sg
+	local backgroundCorner = new("UICorner")
+	backgroundCorner.CornerRadius = UDim.new(0, 15)
+	backgroundCorner.Parent = background
+	local backgroundshadow = new("UIShadow")
+	backgroundshadow.Color = Color3.fromRGB(0, 0, 0)
+	backgroundshadow.Transparency = 0.5
+	backgroundshadow.BlurRadius = UDim.new(0, 20)
+	backgroundshadow.Parent = background
+	local sidebar = new("Frame")
+	sidebar.AnchorPoint = Vector2.new(0.5, 0.5)
+	sidebar.BackgroundColor3 = colors.darkgray
+	sidebar.Position = UDim2.new(0.116, 0,0.5, 0)
+	sidebar.BorderSizePixel = 0
+	sidebar.Size = UDim2.new(0, 150,0, 387)
+	sidebar.Name = "sidebar"
+	sidebar.Parent = background
+	local sidebarCorner = new("UICorner")
+	sidebarCorner.BottomRightRadius = UDim.new(0, 4)
+	sidebarCorner.BottomLeftRadius = UDim.new(0, 15)
+	sidebarCorner.TopLeftRadius = UDim.new(0, 15)
+	sidebarCorner.TopRightRadius = UDim.new(0, 4)
+	sidebarCorner.Parent = sidebar
+	local sidebarshadow = new("UIShadow")
+	sidebarshadow.Color = Color3.fromRGB(0, 0, 0)
+	sidebarshadow.Transparency = 0.5
+	sidebarshadow.BlurRadius = UDim.new(0, 10)
+	sidebarshadow.Parent = sidebar
+	local icon = new("ImageLabel")
+	icon.AnchorPoint = Vector2.new(0.5, 0.5)
+	icon.BackgroundTransparency = 1
+	icon.Position = UDim2.new(0.167, 0,0.065, 0)
+	icon.Image = "rbxassetid://82115350650559"
+	icon.Size = UDim2.new(0, 50,0, 50)
+	icon.ImageColor3 = colors.Lavender
+	icon.Name = "icon"
+	icon.Parent = sidebar
+	local title = new("TextLabel")
+	title.AnchorPoint = Vector2.new(0.5, 0.5)
+	title.BackgroundTransparency = 1
+	title.Position = UDim2.new(0.647, 0,0.065, 0)
+	title.Text = "Title"
+	title.TextColor3 = Color3.fromRGB(174, 149, 255)
+	title.TextXAlignment = Enum.TextXAlignment.Left
+	title.TextSize = 40
+	title.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Bold, Enum.FontStyle.Italic)
+	title.Size = UDim2.new(0, 94, 0, 50)
+	title.Name = "title"
+	title.Parent = sidebar
+
+ ---===================tab===================
+ ---==================stuff==================
+    ---tab1 button
+
+    local tab1 = new("TextButton")
+    tab1.AnchorPoint = Vector2.new(0.5, 0.5)
+    tab1.BackgroundColor3 = colors.white
+    tab1.BackgroundTransparency =  0.8
+    tab1.Position = UDim2.new(0.478, 0,0.194, 0)
+    tab1.Size = UDim2.new(0, 143,0, 30)
+    tab1.Text = "Main"
+    tab1.TextColor3 = colors.white
+    tab1.TextSize = 20
+    tab1.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Bold, Enum.FontStyle.Italic)
+    tab1.Name = "tab1"
+    tab1.Parent = sidebar
+    local tab1Corner = new("UICorner")
+    tab1Corner.CornerRadius = UDim.new(0, 8)
+    tab1Corner.Parent = tab1
+    local tab1icon = new("ImageLabel")
+    tab1icon.AnchorPoint = Vector2.new(0.5, 0.5)
+    tab1icon.BackgroundTransparency = 1
+    tab1icon.Position = UDim2.new(0.127, 0,0.191, 0)
+    tab1icon.Image = "rbxassetid://109841253338329"
+    tab1icon.Size = UDim2.new(0, 25,0, 25)
+    tab1icon.ImageColor3 = colors.white
+    tab1icon.ImageTransparency = 0.1
+    tab1icon.Name = "tab1icon"
+    tab1icon.Parent = sidebar
+    local tab2 = new("TextButton")
+    tab2.AnchorPoint = Vector2.new(0.5, 0.5)
+    tab2.BackgroundColor3 = colors.white
+    tab2.BackgroundTransparency =  1
+    tab2.Position = UDim2.new(0.478, 0,0.292, 0)
+    tab2.Size = UDim2.new(0, 143,0, 30)
+    tab2.Text = "Settings  "
+    tab2.TextColor3 = colors.white
+    tab2.TextSize = 20
+    tab2.FontFace = Font.new("rbxasset://fonts/families/Ubuntu.json", Enum.FontWeight.Bold, Enum.FontStyle.Italic)
+    tab2.Name = "tab2"
+    tab2.Parent = sidebar
+    local tab2Corner = new("UICorner")
+    tab2Corner.CornerRadius = UDim.new(0, 8)
+    tab2Corner.Parent = tab2
+    local tab2icon = new("ImageLabel")
+    tab2icon.AnchorPoint = Vector2.new(0.5, 0.5)
+    tab2icon.BackgroundTransparency = 1
+    tab2icon.Position = UDim2.new(0.127, 0,0.292, 0)
+    tab2icon.Image = "rbxassetid://106205298246017"
+    tab2icon.Size = UDim2.new(0, 25,0, 25)
+    tab2icon.ImageColor3 = colors.white
+    tab2icon.ImageTransparency = 0.1
+    tab2icon.Name = "tab2icon"
+    tab2icon.Parent = sidebar
+    local tabindicator = new("Frame")
+    tabindicator.AnchorPoint = Vector2.new(0.5, 0.5)
+    tabindicator.BackgroundColor3 = colors.Lavender
+    tabindicator.Position = UDim2.new(0.002, 0,0.203, 0)
+    tabindicator.Size = UDim2.new(0, 4,0, 15)
+    tabindicator.Name = "tabindicator"
+    tabindicator.Parent = background
+    local tabindicatorCorner = new("UICorner")
+    tabindicatorCorner.CornerRadius = UDim.new(0, 8)
+    tabindicatorCorner.Parent = tabindicator
+    local tabTweenInfo = TweenInfo.new(0.1, Enum.EasingStyle.Quad, Enum.EasingDirection.Out)
+    tab2.MouseButton1Click:Connect(function()
+        tab2.BackgroundTransparency = 0.8
+        tab1.BackgroundTransparency = 1
+        print("tab2 clicked")
+       ts:Create(tabindicator, tabTweenInfo, { Position = UDim2.new(0.002, 0,0.292, 0) }):Play()
+    end)
+       tab1.MouseButton1Click:Connect(function()
+        tab1.BackgroundTransparency = 0.8
+        tab2.BackgroundTransparency = 1
+        ts:Create(tabindicator, tabTweenInfo, { Position = UDim2.new(0.002, 0,0.203, 0) }):Play()
+         print("tab1 was clicked")
+    end)
+
+
+
+
+end
+load()
+
+
