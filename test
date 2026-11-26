@@ -1,0 +1,19 @@
+   local character = player.Character
+        if not character then
+            warn("Cannot create the part because the character is not loaded")
+            return
+        end
+
+        local rootPart = character:FindFirstChild("HumanoidRootPart")
+        if not rootPart then
+            rootPart = character:WaitForChild("HumanoidRootPart", 5)
+        end
+        if not rootPart or not rootPart:IsA("BasePart") then
+            warn("Cannot create the part because the character has no HumanoidRootPart")
+            return
+        end
+
+        local createdPart = new("Part")
+        createdPart.Anchored = true
+        createdPart.CFrame = rootPart.CFrame * CFrame.new(0, 0, -10)
+        createdPart.Parent = workspace
